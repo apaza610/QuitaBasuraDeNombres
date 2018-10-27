@@ -17,7 +17,9 @@ def arreglarFolder(木, nombreViejo):             # osea Folders
     表現 = re.compile(r'[^\w\s]')               #quitar puntuacion
     文字列 = re.sub(表現 , '', 文字列)
     表現 = re.compile(r'(\s)+(\w)')              #grupos
-    文字列 = re.sub(表現 , aMayuscula, 文字列)     #nombre arreglado
+    文字列 = re.sub(表現 , aMayuscula, 文字列)     #nombre arreglado    #(^\d+)(.+)
+    表現 = re.compile(r'(^\d+)(.+)')            #separar numero de titulo asi:
+    文字列 = 表現.sub(r'\1-\2',文字列)           #007-video06
     os.rename(os.path.join(木, nombreViejo), os.path.join(木, 文字列))
 
 def arreglarArchivo(木, nombreArchivo):
@@ -26,6 +28,8 @@ def arreglarArchivo(木, nombreArchivo):
     文字列 = re.sub(表現 , '', 文字列)
     表現 = re.compile(r'(\s)+(\w)')              #grupos
     文字列 = re.sub(表現 , aMayuscula, 文字列)     #nombre arreglado
+    表現 = re.compile(r'(^\d+)(.+)')            #separar numero de titulo asi:
+    文字列 = 表現.sub(r'\1-\2',文字列)           #007-video06
     文字列 += Path(nombreArchivo).suffix
     print(文字列)
     os.rename(os.path.join(木, nombreArchivo), os.path.join(木, 文字列))
